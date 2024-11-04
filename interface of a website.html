@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KL University Library</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-image: url('placeholder.svg'); /* Ensure the path is correct */
+      background-size: cover;
+      background-position: center;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1; /* Ensure the card is above the overlay */
+    }
+    .card h1 {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 1rem;
+    }
+    .card p {
+      font-size: 1.25rem;
+      color: #6c757d;
+      margin-bottom: 2rem;
+    }
+    .button {
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      font-size: 1.25rem;
+      width: 100%;
+      max-width: 200px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background-color 0.3s; /* Added transition for button */
+    }
+    .button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="card">
+    <h1>WELCOME TO<br>KL UNIVERSITY LIBRARY</h1>
+    <p>Your gateway to knowledge and academic excellence. Explore our vast collection of books, journals, and digital resources.</p>
+    <button class="button" onclick="goToNextPage()">Continue</button>
+  </div>
+
+  <script>
+    function goToNextPage() {
+      // Redirect to the main page
+      window.location.href = 'login page.html'; // Ensure the file path is correct
+    }
+  </script>
+
+</body>
+</html>

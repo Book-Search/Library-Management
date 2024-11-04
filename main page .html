@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Book Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .gap-2 {
+            gap: 10px;
+        }
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .badge {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+            background-color: white;
+        }
+        .badge:hover {
+            background-color: #f0f0f0;
+        }
+        .badge.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .search-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        .search-input-container {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flex mb-4">
+            <h1>Library Book Search</h1>
+            <a href="service page.html" class="button" aria-label="Service Page">Service</a>
+        </div>
+        <div class="search-container mb-4">
+            <div class="search-input-container">
+                <input type="text" id="search-input" placeholder="Search for a book..." onkeyup="filterBooks()">
+            </div>
+            <button class="button" onclick="clearSearch()" aria-label="Clear Search">Clear</button>
+        </div>
+        <button class="button" onclick="toggleFilter()" aria-label="Filter Categories">Filter Categories</button>
+        <div id="filter-container" class="filter-bar">
+            <span class="badge active" onclick="filterByCategory('All')">All</span>
+            <span class="badge" onclick="filterByCategory('Maths')">Maths</span>
+            <span class="badge" onclick="filterByCategory('Physics')">Physics</span>
+            <span class="badge" onclick="filterByCategory('Chemistry')">Chemistry</span>
+            <span class="badge" onclick="filterByCategory('Vedic Maths')">Vedic Maths</span>
+            <span class="badge" onclick="filterByCategory('Computer Science')">Computer Science</span>
+            <span class="badge" onclick="filterByCategory('IOT')">IOT</span>
+            <span class="badge" onclick="filterByCategory('BIOLOGY')">BIOLOGY</span>
+            <span class="badge" onclick="filterByCategory('Arts')">Arts</span>
+        </div>
+        <div id="book-list" class="grid">
+            <!-- Books will be dynamically loaded here -->
+        </div>
+    </div>
+    <script>
+        const books = [
+            { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
+            { id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", year: 2006, category: "Computer Science" },
+            { id: 3, title: "Physics of the Impossible", author: "Michio Kaku", year: 2008, category: "Physics" },
+            { id: 4, title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, category: "Physics" },
+            { id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", year: 1965, category: "Vedic Maths" },
+            { id: 6, title: "Internet of Things", author: "Samuel Greengard", year: 2015, category: "IOT" },
+            { id: 7, title: "Calculus", author: "James Stewart", year: 2015, category: "Maths" },
+            { id: 8, title: "Trigonometry", author: "The Great Lekarz", year: 2012, category: "Maths" },
+            { id: 9, title: "The C Programming Language: ANSI C Version", author: "Brian W. Kernighan, Dennis M. Ritchie", year: 2015, category: "Computer Science" },
+            { id: 10, title: "Data Structures and Program Design in C, 4th Edition", author: "Robert L. Kruse", year: 2006, category: "Computer Science" },
+            { id: 11, title: "Internet of Things", author: "Rajkamal", year: 2004, category: "IOT" },
+            { id: 12, title: "Internet of Things (A Hands-On Approach)", author: "Vijay Madisetti, Arshdeep Bahga", year: 2015, category: "IOT" },
+            { id: 13, title: "The Internet of Things: Connecting Objects", author: "M. Rama Lingham", year: 2016, category: "IOT" },
+            { id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G. Manolakis", year: 2012, category: "IOT" },
+            { id: 15, title: "Wireless Communications and Networking", author: "Vijay K. Garg", year: 2020, category: "IOT" },
+            { id: 16, title: "Introduction to Radar Systems", author: "Merrill I. Skolnik", year: 2000, category: "IOT" },
+            { id: 17, title: "Wireless Sensor Network", author: "Leonidas Guibas", year: 2021, category: "IOT" },
+            { id: 18, title: "Fiber-optic Communication System", author: "Govind P. Agarwal", year: 2006, category: "IOT" },
+            { id: 19, title: "Introduction to Wireless & Mobile System", author: "Dharma Prakash Agarwal", year: 2004, category: "IOT" },
+            { id: 20, title: "Satellite Communication System", author: "M. Richharia", year: 1999, category: "IOT" },
+            { id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", year: 2001, category: "IOT" },
+            { id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", year: 2003, category: "IOT" },
+            { id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", year: 2020, category: "IOT" }
+        ];
+        
+        let currentCategory = 'All';
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
+                badge.classList.toggle('active', badge.innerText === category);
+            });
+            filterBooks();
+        }
+
+        function filterBooks() {
+            const searchTerm = document.getElementById("search-input").value.toLowerCase();
+            const filteredBooks = books.filter(book => {
+                return (book.title.toLowerCase().includes(searchTerm) && (currentCategory === 'All' || book.category === currentCategory));
+            });
+            renderBooks(filteredBooks);
+        }
+
+        function renderBooks(bookList) {
+            const bookListContainer = document.getElementById("book-list");
+            bookListContainer.innerHTML = '';
+            bookList.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'card';
+                bookCard.innerHTML = `
+                    <div class="card-title">${book.title}</div>
+                    <p>Author: ${book.author}</p>
+                    <p>Year: ${book.year}</p>
+                    <a href="m page 2.html?id=${book.id}" class="button">View Details</a>
+                `;
+                bookListContainer.appendChild(bookCard);
+            });
+        }
+
+        function clearSearch() {
+            document.getElementById("search-input").value = "";
+            currentCategory = 'All';
+            document.querySelectorAll('.badge').forEach(badge => badge.classList.remove('active'));
+            document.querySelector('.badge').classList.add('active');
+            filterBooks();
+        }
+
+        function toggleFilter() {
+            const filterContainer = document.getElementById("filter-container");
+            filterContainer.style.display = filterContainer.style.display === "none" || filterContainer.style.display === "" ? "flex" : "none";
+        }
+
+        renderBooks(books);
+    </script>
+</body>
+</html>

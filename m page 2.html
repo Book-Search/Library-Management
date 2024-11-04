@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="book-details" class="card">
+            <!-- Book details will be dynamically loaded here -->
+        </div>
+        <a href="main page .html" class="button">Back to Search</a>
+    </div>
+
+    <script>
+        const books = [
+            { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", price: 80, year: 2009, location: "Floor 2, Row A", category: "Computer Science" },
+            { id: 2, title: "Introduction to c programming", author: "Thomas lekarz", price: 70, year: 2006, location: "Floor 1, Row B", category: "Computer Science" },
+            { id: 3, title: "Physics of the Impossible", author: "Michio Kaku", price: 15, year: 2008, location: "Floor 1, Row C", category: "Physics" },
+            { id: 4, title: "A Brief History of Time", author: "Stephen Hawking", price: 10, year: 1988, location: "Floor 1, Row B", category: "Physics" },
+            { id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", price: 12, year: 1965, location: "Floor 3, Row D", category: "Vedic Maths" },
+            { id: 6, title: "Internet of Things", author: "Samuel Greengard", price: 20, year: 2015, location: "Floor 2, Row B", category: "IOT" },
+            { id: 7, title: "Calculus", author: "James Stewart", price: 200, year: 2015, location: "Floor 3, Row A", category: "Maths" },
+            { id: 8, title: "Trigonomertry laws", author: "The greate lekarz", price: 420, year: 2002, location: "Floor 2, Row D", category: "Arts" },
+            { id: 9, title: "The C Programming Language: ANSI C Version", author: " Brian W. Kernighan, Dennis M. Ritchie", price: 643, year: 2015, location: "Floor G, Row D", category: "Computer Science" },
+            { id: 10, title: "Data structures and Program Design in C , 4th Edition", author: " Robert Kruse, C. L. Tondo, Bruce Leung, Shashi Mogalla ", price: 680, year: 2006, location: "Floor 1, Row B", category: " Computer Science "},
+            { id: 11, title: "Internet of Things ", author: " Rajkamal, Tata McGraw Hill", price: 620, year: 2004, location: " Floor 1, Row A ", category: " IOT "},
+            { id: 12, title: "Internet of things (A-Hand-on-Approach)", author: "Vijay Madisetti and Arshdeep Bahga", price: 700, year: 2015, location: "Floor 3, Row B", category: "IOT"},
+            { id: 13, title: "The Internet of Things: Connecting Objects ", author: "M.Rama lingham", price: 220, year: 2016 , location: "Ground Floor , Rack 24,I5", category: "IOT"},
+            { id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G.Manolakis", price: 120, year: 2012, location: "Ground Floor , Row 24-I5 ", category: "IOT"},
+            { id: 15, title: "Wireless Communications And Networking", author: "Viyay K.Garg", price: 500, year: 2020, location: "Ground Floor , Row 25-H3 ", category: "IOT"},
+            { id: 16, title: "Introduction To Rader System", author: "merrill I.Skolnik", price: 420, year: 2000, location: "Ground Floor , Row 25-I4", category: "IOT"},
+            { id: 17, title: "Wireless Sensor Network", author: "Lenidas Guibas", price: 320, year: 2021, location: "Ground Floor , Row 25-G3 ", category: "IOT"},
+            { id: 18, title: "Fiber-optic Communication System", author: "Govind P.Agarwal", price: 100, year: 2006, location: "Ground Floor , Row 24-R3 ", category: "IOT"},
+            { id: 19, title: "Introduction To Wireless & Mobile System", author: "Dhrama Prakash agarwal", price: 190, year: 2004, location: "Ground Floor , Row 25-H5 ", category: "IOT"},
+            { id: 20, title: "Satillite Communication System", author: "M.Richharia", price: 300, year: 1999, location: "Ground Floor , Row 24-N4 ", category: "IOT"},
+            { id: 21, title: "Antenna Measurement Tecniques", author: "Gary E.Evans", price: 220, year: 2001, location: "Ground Floor , Row 25-F4 ", category: "IOT"},
+            { id: 22, title: "Signals And systems", author: "Alan V. Oppenheim,alan S.Willsky", price: 590, year: 2003, location: "Ground Floor , Row 23-L3 ", category: "IOT"},
+            { id: 23, title: "Advanced Electronic Communications System", author: "wayne tomasi", price: 295, year: 2020, location: "Ground Floor , Row 22-K4 ", category: "IOT"},
+    
+    
+           
+        ];
+
+        function getBookDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = parseInt(urlParams.get('id'), 10);
+            const book = books.find(b => b.id === bookId);
+
+            if (book) {
+                const bookDetailsContainer = document.getElementById("book-details");
+                bookDetailsContainer.innerHTML = `
+                    <h2>${book.title}</h2>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Price:</strong> ₹${book.price}</p>
+                    <p><strong>Year:</strong> ${book.year}</p>
+                    <p><strong>Location:</strong> ${book.location}</p>
+                    <p><strong>Category:</strong> ${book.category}</p>
+                `;
+            } else {
+                document.getElementById("book-details").innerHTML = "<p>Book not found.</p>";
+            }
+        }
+
+        // Call the function to display book details
+        getBookDetails();
+    </script>
+</body>
