@@ -152,7 +152,17 @@
             { id: 20, title: "Satellite Communication System", author: "M. Richharia", year: 1999, category: "IOT" },
             { id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", year: 2001, category: "IOT" },
             { id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", year: 2003, category: "IOT" },
-            { id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", year: 2020, category: "IOT" }
+            { id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", year: 2020, category: "IOT" },
+            { id: 24, title: "Chemistry in Engineering", author: "J.C. Kuriacose", year: 2012, category: "Chemistry" },
+            { id: 25, title: "Engineering Chemistry 17th Edition", author: "Dhanpat Rai", year: 2008, category: "Chemistry" },
+            { id: 26, title: "Organic Chemistry Seventh Edition", author: "Francis A. Carey", year: 2004, category: "Chemistry" },
+            { id: 27, title: "Organic Chemistry Fifth Edition", author: "Stanley H. Pine", year: 2006, category: "Chemistry" },
+            { id: 28, title: "Environmental Chemistry Fifth Edition", author: "A.K. De", year: 2003, category: "Chemistry" },
+            { id: 29, title: "Organic Reactions and their Mechanisms", author: "P.S. Kalsi", year: 2002, category: "Chemistry" },
+            { id: 30, title: "Chemistry for Engineers and Technologies", author: "H.D. Gasser", year: 2005, category: "Chemistry" },
+            { id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, category: "Chemistry" },
+            { id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, category: "Chemistry" },
+            { id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, category: "Chemistry" }
         ];
         
         let currentCategory = 'All';
@@ -169,7 +179,10 @@
         function filterBooks() {
             const searchTerm = document.getElementById("search-input").value.toLowerCase();
             const filteredBooks = books.filter(book => {
-                return (book.title.toLowerCase().includes(searchTerm) && (currentCategory === 'All' || book.category === currentCategory));
+                return (
+                    (book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm)) &&
+                    (currentCategory === 'All' || book.category === currentCategory)
+                );
             });
             renderBooks(filteredBooks);
         }
