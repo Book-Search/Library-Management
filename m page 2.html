@@ -54,31 +54,38 @@
     <script>
         const books = [
             { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", price: 80, year: 2009, location: "Floor 2, Row A", category: "Computer Science" },
-            { id: 2, title: "Introduction to c programming", author: "Thomas lekarz", price: 70, year: 2006, location: "Floor 1, Row B", category: "Computer Science" },
+            { id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", price: 70, year: 2006, location: "Floor 1, Row B", category: "Computer Science" },
             { id: 3, title: "Physics of the Impossible", author: "Michio Kaku", price: 15, year: 2008, location: "Floor 1, Row C", category: "Physics" },
             { id: 4, title: "A Brief History of Time", author: "Stephen Hawking", price: 10, year: 1988, location: "Floor 1, Row B", category: "Physics" },
             { id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", price: 12, year: 1965, location: "Floor 3, Row D", category: "Vedic Maths" },
             { id: 6, title: "Internet of Things", author: "Samuel Greengard", price: 20, year: 2015, location: "Floor 2, Row B", category: "IOT" },
             { id: 7, title: "Calculus", author: "James Stewart", price: 200, year: 2015, location: "Floor 3, Row A", category: "Maths" },
-            { id: 8, title: "Trigonomertry laws", author: "The greate lekarz", price: 420, year: 2002, location: "Floor 2, Row D", category: "Arts" },
-            { id: 9, title: "The C Programming Language: ANSI C Version", author: " Brian W. Kernighan, Dennis M. Ritchie", price: 643, year: 2015, location: "Floor G, Row D", category: "Computer Science" },
-            { id: 10, title: "Data structures and Program Design in C , 4th Edition", author: " Robert Kruse, C. L. Tondo, Bruce Leung, Shashi Mogalla ", price: 680, year: 2006, location: "Floor 1, Row B", category: " Computer Science "},
-            { id: 11, title: "Internet of Things ", author: " Rajkamal, Tata McGraw Hill", price: 620, year: 2004, location: " Floor 1, Row A ", category: " IOT "},
-            { id: 12, title: "Internet of things (A-Hand-on-Approach)", author: "Vijay Madisetti and Arshdeep Bahga", price: 700, year: 2015, location: "Floor 3, Row B", category: "IOT"},
-            { id: 13, title: "The Internet of Things: Connecting Objects ", author: "M.Rama lingham", price: 220, year: 2016 , location: "Ground Floor , Rack 24,I5", category: "IOT"},
-            { id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G.Manolakis", price: 120, year: 2012, location: "Ground Floor , Row 24-I5 ", category: "IOT"},
-            { id: 15, title: "Wireless Communications And Networking", author: "Viyay K.Garg", price: 500, year: 2020, location: "Ground Floor , Row 25-H3 ", category: "IOT"},
-            { id: 16, title: "Introduction To Rader System", author: "merrill I.Skolnik", price: 420, year: 2000, location: "Ground Floor , Row 25-I4", category: "IOT"},
-            { id: 17, title: "Wireless Sensor Network", author: "Lenidas Guibas", price: 320, year: 2021, location: "Ground Floor , Row 25-G3 ", category: "IOT"},
-            { id: 18, title: "Fiber-optic Communication System", author: "Govind P.Agarwal", price: 100, year: 2006, location: "Ground Floor , Row 24-R3 ", category: "IOT"},
-            { id: 19, title: "Introduction To Wireless & Mobile System", author: "Dhrama Prakash agarwal", price: 190, year: 2004, location: "Ground Floor , Row 25-H5 ", category: "IOT"},
-            { id: 20, title: "Satillite Communication System", author: "M.Richharia", price: 300, year: 1999, location: "Ground Floor , Row 24-N4 ", category: "IOT"},
-            { id: 21, title: "Antenna Measurement Tecniques", author: "Gary E.Evans", price: 220, year: 2001, location: "Ground Floor , Row 25-F4 ", category: "IOT"},
-            { id: 22, title: "Signals And systems", author: "Alan V. Oppenheim,alan S.Willsky", price: 590, year: 2003, location: "Ground Floor , Row 23-L3 ", category: "IOT"},
-            { id: 23, title: "Advanced Electronic Communications System", author: "wayne tomasi", price: 295, year: 2020, location: "Ground Floor , Row 22-K4 ", category: "IOT"},
-    
-    
-           
+            { id: 8, title: "Trigonometry Laws", author: "The Great Lekarz", price: 420, year: 2002, location: "Floor 2, Row D", category: "Arts" },
+            { id: 9, title: "The C Programming Language: ANSI C Version", author: "Brian W. Kernighan, Dennis M. Ritchie", price: 643, year: 2015, location: "Floor G, Row D", category: "Computer Science" },
+            { id: 10, title: "Data Structures and Program Design in C, 4th Edition", author: "Robert Kruse, C. L. Tondo, Bruce Leung, Shashi Mogalla", price: 680, year: 2006, location: "Floor 1, Row B", category: "Computer Science" },
+            { id: 11, title: "Internet of Things", author: "Rajkamal, Tata McGraw Hill", price: 620, year: 2004, location: "Floor 1, Row A", category: "IOT" },
+            { id: 12, title: "Internet of Things (A Hands-On Approach)", author: "Vijay Madisetti and Arshdeep Bahga", price: 700, year: 2015, location: "Floor 3, Row B", category: "IOT" },
+            { id: 13, title: "The Internet of Things: Connecting Objects", author: "M. Rama Lingham", price: 220, year: 2016, location: "Ground Floor, Rack 24, I5", category: "IOT" },
+            { id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G. Manolakis", price: 120, year: 2012, location: "Ground Floor, Row 24-I5", category: "IOT" },
+            { id: 15, title: "Wireless Communications and Networking", author: "Vijay K. Garg", price: 500, year: 2020, location: "Ground Floor, Row 25-H3", category: "IOT" },
+            { id: 16, title: "Introduction to Radar Systems", author: "Merrill I. Skolnik", price: 420, year: 2000, location: "Ground Floor, Row 25-I4", category: "IOT" },
+            { id: 17, title: "Wireless Sensor Network", author: "Leonidas Guibas", price: 320, year: 2021, location: "Ground Floor, Row 25-G3", category: "IOT" },
+            { id: 18, title: "Fiber-optic Communication System", author: "Govind P. Agarwal", price: 100, year: 2006, location: "Ground Floor, Row 24-R3", category: "IOT" },
+            { id: 19, title: "Introduction to Wireless & Mobile Systems", author: "Dharma Prakash Agarwal", price: 190, year: 2004, location: "Ground Floor, Row 25-H5", category: "IOT" },
+            { id: 20, title: "Satellite Communication System", author: "M. Richharia", price: 300, year: 1999, location: "Ground Floor, Row 24-N4", category: "IOT" },
+            { id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", price: 220, year: 2001, location: "Ground Floor, Row 25-F4", category: "IOT" },
+            { id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", price: 590, year: 2003, location: "Ground Floor, Row 23-L3", category: "IOT" },
+            { id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", price: 295, year: 2020, location: "Ground Floor, Row 22-K4", category: "IOT" },
+            { id: 24, title: "Chemistry in Engineering", author: "J. C. Kuriacose", year: 2012, price: 489, location: "Ground Floor, Row 32-I4", category: "Chemistry" },
+            { id: 25, title: "Engineering Chemistry 17th Edition", author: "Dhanpat Rai", year: 2008, price: 470, location: "Ground Floor, Row 32-K3", category: "Chemistry" },
+            { id: 26, title: "Organic Chemistry Seventh Edition", author: "Francis A. Carey", year: 2004, price: 500, location: "Ground Floor, Row 33-F4", category: "Chemistry" },
+            { id: 27, title: "Organic Chemistry Fifth Edition", author: "Stanley H. Pine", year: 2006, price: 540, location: "Ground Floor, Row 33-F2", category: "Chemistry" },
+            { id: 28, title: "Environmental Chemistry Fifth Edition", author: "A. K. De", year: 2003, price: 600, location: "Ground Floor, Row 33-H2", category: "Chemistry" },
+            { id: 29, title: "Organic Reactions and Their Mechanisms", author: "P. S. Kalsi", year: 2002, price: 490, location: "Ground Floor, Row 33-G4", category: "Chemistry" },
+            { id: 30, title: "Chemistry for Engineers and Technologies", author: "H. D. Gasser", year: 2005, price: 800, location: "Ground Floor, Row 33-H5", category: "Chemistry" },
+            { id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, price: 500, location: "Ground Floor, Row 33-E4", category: "Chemistry" },
+            { id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, price: 750, location: "Ground Floor, Row 33-A3", category: "Chemistry" },
+            { id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, price: 400, location: "Ground Floor, Row 33-A6", category: "Chemistry" }
         ];
 
         function getBookDetails() {
@@ -105,3 +112,4 @@
         getBookDetails();
     </script>
 </body>
+</html>
