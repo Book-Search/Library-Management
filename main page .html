@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif;            
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
@@ -122,7 +122,7 @@
             <span class="badge" onclick="filterByCategory('Computer Science')">Computer Science</span>
             <span class="badge" onclick="filterByCategory('IOT')">IOT</span>
             <span class="badge" onclick="filterByCategory('BIOLOGY')">BIOLOGY</span>
-            <span class="badge" onclick="filterByCategory('Arts')">Arts</span>
+            <span class="badge" onclick="filterByCategory('Civil Engineering')">Civil Engineering</span>
         </div>
         <div id="book-list" class="grid">
             <!-- Books will be dynamically loaded here -->
@@ -162,7 +162,35 @@
             { id: 30, title: "Chemistry for Engineers and Technologies", author: "H.D. Gasser", year: 2005, category: "Chemistry" },
             { id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, category: "Chemistry" },
             { id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, category: "Chemistry" },
-            { id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, category: "Chemistry" }
+            { id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, category: "Chemistry" },
+            { id: 34, title: "Copilers-Principle,techniques and Tool-Second Edition", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
+            { id: 35, title: "The Standard C Library", author: "P.J. Plauger", year:2017 , category: "Computer Science" },
+            { id: 36, title: "modern compiler implementation in c", author: "Andrew Appel", year: 1999, category: "Computer Science" },
+            { id: 37, title: "Data Structures and Algorithm Analysis in C", author: "Mark Allen weiss", year:2018 , category: "Computer Science" },
+            { id: 38, title: "C in Depth", author: "Deepali Srivastava", year:2009 , category: "Computer Science" },
+            
+            { id: 39, title: "Advanced Engineering Mahematics-5th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2016 ,category:"Maths"},
+            { id: 40, title: "Discrete Mathematics for Computer Scientists And Mathematicians", author:"R.K Jain and S.R.K.Iyengar", year:2002 ,category:"Maths"},
+            { id: 41, title: "Advanced Engineering Mathematics-4th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2002 ,category:"Maths"},
+            { id: 42, title: "Higher engineering Mathematics", author:"Dr.B.S.Grewal", year:2018 ,category:"Maths"},
+            { id: 43, title: "Data structures and Program Design in C , 4th Edition", author:"Anthony Croft,Robert Davison,Martin Hargreaves", year: 2009,category:"Maths"},
+            { id: 44, title: "Engineering Mathematics-volume 2", author:"Meena Kumari", year:2015 ,category:"Maths"},
+            { id: 45, title: "Fourth edition-Engineering Mathematics-volume 2", author:"S.S.Sastry", year:2014 ,category:"Maths"},
+            { id: 46, title: "Engineering Mathematics", author:"Ravish R Singh,Mukul Bhatt", year:2017 ,category:"Maths"},
+            { id: 47, title: "Advanced Engineering Mathematics", author:"Michael Greenberg", year:2006 ,category:"Maths"},
+         
+            { id: 48, title: "Brock Biology of Microorganisms", author:"John M.Martinko,Kelly S.Bender,Daniel H.Buckley,David A.Stahi", year:2002  ,category:"Biology"},
+            { id: 49, title: "Microbiology", author:"Michael J.Pelczar,Jr.E.C.S.Chan,Noel R.Krieg", year:2001 ,category:"Biology"},
+            { id: 50, title: "Cell Biology,Genetics,Molecular Biology,Evolution and Ecology", author:"P.S.Verma,V.K. Agarwal", year:2004 ,category:"Biology"},
+            { id: 51, title: "Biochemistry", author:"Jeremy M.Berg,John L.Tymoczko,Lubert Stryer", year:2006 ,category:"Biology"},
+            { id: 52, title: "Biochemistry", author:"U.Satyanarayana,U.Chakrapani", year:2017 ,category:"Biology"},
+
+            { id: 53, title: "Design of Reinforced Cocrete Structures-5th edition", author:"P.Dayaratnam,P.Sarah", year:2017 ,category:"Civil Engineering"},
+            { id: 54, title: "Advanced Reinforced Concrete Design", author:"P.C.Varghese", year:2010 ,category:"Civil Engineering"},
+            { id: 55, title: "Concrete Technology-Theory and Practice", author:"M.S.Shetty", year:2014 ,category:"Civil Engineering"},
+            { id: 56, title: "Prestressed Concrete Bridges", author:"N.Krishna Raju", year:2016 ,category:"Civil Engineering"},
+            { id: 57, title: "Civil Engineering-pocket book", author:"Suresh .C .Biradar", year:2024 ,category:"Civil Engineering"},
+
         ];
         
         let currentCategory = 'All';
