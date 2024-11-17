@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;            
+            font-family: Arial, sans-serif;
             background-color: #f7f7f7;
             margin: 0;
             padding: 0;
@@ -114,7 +114,7 @@
         </div>
         <button class="button" onclick="toggleFilter()" aria-label="Filter Categories">Filter Categories</button>
         <div id="filter-container" class="filter-bar">
-            <span class="badge active" onclick="filterByCategory('All')">All</span>
+            <span class="badge" onclick="filterByCategory('All')">All</span>
             <span class="badge" onclick="filterByCategory('Maths')">Maths</span>
             <span class="badge" onclick="filterByCategory('Physics')">Physics</span>
             <span class="badge" onclick="filterByCategory('Chemistry')">Chemistry</span>
@@ -129,74 +129,75 @@
         </div>
     </div>
     <script>
-        const books = [
-            { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
-            { id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", year: 2006, category: "Computer Science" },
-            { id: 3, title: "Physics of the Impossible", author: "Michio Kaku", year: 2008, category: "Physics" },
-            { id: 4, title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, category: "Physics" },
-            { id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", year: 1965, category: "Vedic Maths" },
-            { id: 6, title: "Internet of Things", author: "Samuel Greengard", year: 2015, category: "IOT" },
-            { id: 7, title: "Calculus", author: "James Stewart", year: 2015, category: "Maths" },
-            { id: 8, title: "Trigonometry", author: "The Great Lekarz", year: 2012, category: "Maths" },
-            { id: 9, title: "The C Programming Language: ANSI C Version", author: "Brian W. Kernighan, Dennis M. Ritchie", year: 2015, category: "Computer Science" },
-            { id: 10, title: "Data Structures and Program Design in C, 4th Edition", author: "Robert L. Kruse", year: 2006, category: "Computer Science" },
-            { id: 11, title: "Internet of Things", author: "Rajkamal", year: 2004, category: "IOT" },
-            { id: 12, title: "Internet of Things (A Hands-On Approach)", author: "Vijay Madisetti, Arshdeep Bahga", year: 2015, category: "IOT" },
-            { id: 13, title: "The Internet of Things: Connecting Objects", author: "M. Rama Lingham", year: 2016, category: "IOT" },
-            { id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G. Manolakis", year: 2012, category: "IOT" },
-            { id: 15, title: "Wireless Communications and Networking", author: "Vijay K. Garg", year: 2020, category: "IOT" },
-            { id: 16, title: "Introduction to Radar Systems", author: "Merrill I. Skolnik", year: 2000, category: "IOT" },
-            { id: 17, title: "Wireless Sensor Network", author: "Leonidas Guibas", year: 2021, category: "IOT" },
-            { id: 18, title: "Fiber-optic Communication System", author: "Govind P. Agarwal", year: 2006, category: "IOT" },
-            { id: 19, title: "Introduction to Wireless & Mobile System", author: "Dharma Prakash Agarwal", year: 2004, category: "IOT" },
-            { id: 20, title: "Satellite Communication System", author: "M. Richharia", year: 1999, category: "IOT" },
-            { id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", year: 2001, category: "IOT" },
-            { id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", year: 2003, category: "IOT" },
-            { id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", year: 2020, category: "IOT" },
-            { id: 24, title: "Chemistry in Engineering", author: "J.C. Kuriacose", year: 2012, category: "Chemistry" },
-            { id: 25, title: "Engineering Chemistry 17th Edition", author: "Dhanpat Rai", year: 2008, category: "Chemistry" },
-            { id: 26, title: "Organic Chemistry Seventh Edition", author: "Francis A. Carey", year: 2004, category: "Chemistry" },
-            { id: 27, title: "Organic Chemistry Fifth Edition", author: "Stanley H. Pine", year: 2006, category: "Chemistry" },
-            { id: 28, title: "Environmental Chemistry Fifth Edition", author: "A.K. De", year: 2003, category: "Chemistry" },
-            { id: 29, title: "Organic Reactions and their Mechanisms", author: "P.S. Kalsi", year: 2002, category: "Chemistry" },
-            { id: 30, title: "Chemistry for Engineers and Technologies", author: "H.D. Gasser", year: 2005, category: "Chemistry" },
-            { id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, category: "Chemistry" },
-            { id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, category: "Chemistry" },
-            { id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, category: "Chemistry" },
-            { id: 34, title: "Copilers-Principle,techniques and Tool-Second Edition", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
-            { id: 35, title: "The Standard C Library", author: "P.J. Plauger", year:2017 , category: "Computer Science" },
-            { id: 36, title: "modern compiler implementation in c", author: "Andrew Appel", year: 1999, category: "Computer Science" },
-            { id: 37, title: "Data Structures and Algorithm Analysis in C", author: "Mark Allen weiss", year:2018 , category: "Computer Science" },
-            { id: 38, title: "C in Depth", author: "Deepali Srivastava", year:2009 , category: "Computer Science" },
-            
-            { id: 39, title: "Advanced Engineering Mahematics-5th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2016 ,category:"Maths"},
-            { id: 40, title: "Discrete Mathematics for Computer Scientists And Mathematicians", author:"R.K Jain and S.R.K.Iyengar", year:2002 ,category:"Maths"},
-            { id: 41, title: "Advanced Engineering Mathematics-4th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2002 ,category:"Maths"},
-            { id: 42, title: "Higher engineering Mathematics", author:"Dr.B.S.Grewal", year:2018 ,category:"Maths"},
-            { id: 43, title: "Data structures and Program Design in C , 4th Edition", author:"Anthony Croft,Robert Davison,Martin Hargreaves", year: 2009,category:"Maths"},
-            { id: 44, title: "Engineering Mathematics-volume 2", author:"Meena Kumari", year:2015 ,category:"Maths"},
-            { id: 45, title: "Fourth edition-Engineering Mathematics-volume 2", author:"S.S.Sastry", year:2014 ,category:"Maths"},
-            { id: 46, title: "Engineering Mathematics", author:"Ravish R Singh,Mukul Bhatt", year:2017 ,category:"Maths"},
-            { id: 47, title: "Advanced Engineering Mathematics", author:"Michael Greenberg", year:2006 ,category:"Maths"},
-         
-            { id: 48, title: "Brock Biology of Microorganisms", author:"John M.Martinko,Kelly S.Bender,Daniel H.Buckley,David A.Stahi", year:2002  ,category:"Biology"},
-            { id: 49, title: "Microbiology", author:"Michael J.Pelczar,Jr.E.C.S.Chan,Noel R.Krieg", year:2001 ,category:"Biology"},
-            { id: 50, title: "Cell Biology,Genetics,Molecular Biology,Evolution and Ecology", author:"P.S.Verma,V.K. Agarwal", year:2004 ,category:"Biology"},
-            { id: 51, title: "Biochemistry", author:"Jeremy M.Berg,John L.Tymoczko,Lubert Stryer", year:2006 ,category:"Biology"},
-            { id: 52, title: "Biochemistry", author:"U.Satyanarayana,U.Chakrapani", year:2017 ,category:"Biology"},
+        const books = [ 
 
-            { id: 53, title: "Design of Reinforced Cocrete Structures-5th edition", author:"P.Dayaratnam,P.Sarah", year:2017 ,category:"Civil Engineering"},
-            { id: 54, title: "Advanced Reinforced Concrete Design", author:"P.C.Varghese", year:2010 ,category:"Civil Engineering"},
-            { id: 55, title: "Concrete Technology-Theory and Practice", author:"M.S.Shetty", year:2014 ,category:"Civil Engineering"},
-            { id: 56, title: "Prestressed Concrete Bridges", author:"N.Krishna Raju", year:2016 ,category:"Civil Engineering"},
-            { id: 57, title: "Civil Engineering-pocket book", author:"Suresh .C .Biradar", year:2024 ,category:"Civil Engineering"},
+{ id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
+{ id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", year: 2006, category: "Computer Science" },
+{ id: 3, title: "Physics of the Impossible", author: "Michio Kaku", year: 2008, category: "Physics" },
+{ id: 4, title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, category: "Physics" },
+{ id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", year: 1965, category: "Vedic Maths" },
+{ id: 6, title: "Internet of Things", author: "Samuel Greengard", year: 2015, category: "IOT" },
+{ id: 7, title: "Calculus", author: "James Stewart", year: 2015, category: "Maths" },
+{ id: 8, title: "Trigonometry", author: "The Great Lekarz", year: 2012, category: "Maths" },
+{ id: 9, title: "The C Programming Language: ANSI C Version", author: "Brian W. Kernighan, Dennis M. Ritchie", year: 2015, category: "Computer Science" },
+{ id: 10, title: "Data Structures and Program Design in C, 4th Edition", author: "Robert L. Kruse", year: 2006, category: "Computer Science" },
+{ id: 11, title: "Internet of Things", author: "Rajkamal", year: 2004, category: "IOT" },
+{ id: 12, title: "Internet of Things (A Hands-On Approach)", author: "Vijay Madisetti, Arshdeep Bahga", year: 2015, category: "IOT" },
+{ id: 13, title: "The Internet of Things: Connecting Objects", author: "M. Rama Lingham", year: 2016, category: "IOT" },
+{ id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G. Manolakis", year: 2012, category: "IOT" },
+{ id: 15, title: "Wireless Communications and Networking", author: "Vijay K. Garg", year: 2020, category: "IOT" },
+{ id: 16, title: "Introduction to Radar Systems", author: "Merrill I. Skolnik", year: 2000, category: "IOT" },
+{ id: 17, title: "Wireless Sensor Network", author: "Leonidas Guibas", year: 2021, category: "IOT" },
+{ id: 18, title: "Fiber-optic Communication System", author: "Govind P. Agarwal", year: 2006, category: "IOT" },
+{ id: 19, title: "Introduction to Wireless & Mobile System", author: "Dharma Prakash Agarwal", year: 2004, category: "IOT" },
+{ id: 20, title: "Satellite Communication System", author: "M. Richharia", year: 1999, category: "IOT" },
+{ id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", year: 2001, category: "IOT" },
+{ id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", year: 2003, category: "IOT" },
+{ id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", year: 2020, category: "IOT" },
+{ id: 24, title: "Chemistry in Engineering", author: "J.C. Kuriacose", year: 2012, category: "Chemistry" },
+{ id: 25, title: "Engineering Chemistry 17th Edition", author: "Dhanpat Rai", year: 2008, category: "Chemistry" },
+{ id: 26, title: "Organic Chemistry Seventh Edition", author: "Francis A. Carey", year: 2004, category: "Chemistry" },
+{ id: 27, title: "Organic Chemistry Fifth Edition", author: "Stanley H. Pine", year: 2006, category: "Chemistry" },
+{ id: 28, title: "Environmental Chemistry Fifth Edition", author: "A.K. De", year: 2003, category: "Chemistry" },
+{ id: 29, title: "Organic Reactions and their Mechanisms", author: "P.S. Kalsi", year: 2002, category: "Chemistry" },
+{ id: 30, title: "Chemistry for Engineers and Technologies", author: "H.D. Gasser", year: 2005, category: "Chemistry" },
+{ id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, category: "Chemistry" },
+{ id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, category: "Chemistry" },
+{ id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, category: "Chemistry" },
+{ id: 34, title: "Copilers-Principle,techniques and Tool-Second Edition", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
+{ id: 35, title: "The Standard C Library", author: "P.J. Plauger", year:2017 , category: "Computer Science" },
+{ id: 36, title: "modern compiler implementation in c", author: "Andrew Appel", year: 1999, category: "Computer Science" },
+{ id: 37, title: "Data Structures and Algorithm Analysis in C", author: "Mark Allen weiss", year:2018 , category: "Computer Science" },
+{ id: 38, title: "C in Depth", author: "Deepali Srivastava", year:2009 , category: "Computer Science" },
 
-        ];
-        
-        let currentCategory = 'All';
+{ id: 39, title: "Advanced Engineering Mahematics-5th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2016 ,category:"Maths"},
+{ id: 40, title: "Discrete Mathematics for Computer Scientists And Mathematicians", author:"R.K Jain and S.R.K.Iyengar", year:2002 ,category:"Maths"},
+{ id: 41, title: "Advanced Engineering Mathematics-4th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2002 ,category:"Maths"},
+{ id: 42, title: "Higher engineering Mathematics", author:"Dr.B.S.Grewal", year:2018 ,category:"Maths"},
+{ id: 43, title: "Data structures and Program Design in C , 4th Edition", author:"Anthony Croft,Robert Davison,Martin Hargreaves", year: 2009,category:"Maths"},
+{ id: 44, title: "Engineering Mathematics-volume 2", author:"Meena Kumari", year:2015 ,category:"Maths"},
+{ id: 45, title: "Fourth edition-Engineering Mathematics-volume 2", author:"S.S.Sastry", year:2014 ,category:"Maths"},
+{ id: 46, title: "Engineering Mathematics", author:"Ravish R Singh,Mukul Bhatt", year:2017 ,category:"Maths"},
+{ id: 47, title: "Advanced Engineering Mathematics", author:"Michael Greenberg", year:2006 ,category:"Maths"},
+
+{ id: 48, title: "Brock Biology of Microorganisms", author:"John M.Martinko,Kelly S.Bender,Daniel H.Buckley,David A.Stahi", year:2002  ,category:"Biology"},
+{ id: 49, title: "Microbiology", author:"Michael J.Pelczar,Jr.E.C.S.Chan,Noel R.Krieg", year:2001 ,category:"Biology"},
+{ id: 50, title: "Cell Biology,Genetics,Molecular Biology,Evolution and Ecology", author:"P.S.Verma,V.K. Agarwal", year:2004 ,category:"Biology"},
+{ id: 51, title: "Biochemistry", author:"Jeremy M.Berg,John L.Tymoczko,Lubert Stryer", year:2006 ,category:"Biology"},
+{ id: 52, title: "Biochemistry", author:"U.Satyanarayana,U.Chakrapani", year:2017 ,category:"Biology"},
+
+{ id: 53, title: "Design of Reinforced Cocrete Structures-5th edition", author:"P.Dayaratnam,P.Sarah", year:2017 ,category:"Civil Engineering"},
+{ id: 54, title: "Advanced Reinforced Concrete Design", author:"P.C.Varghese", year:2010 ,category:"Civil Engineering"},
+{ id: 55, title: "Concrete Technology-Theory and Practice", author:"M.S.Shetty", year:2014 ,category:"Civil Engineering"},
+{ id: 56, title: "Prestressed Concrete Bridges", author:"N.Krishna Raju", year:2016 ,category:"Civil Engineering"},
+{ id: 57, title: "Civil Engineering-pocket book", author:"Suresh .C .Biradar", year:2024 ,category:"Civil Engineering"},
+ ];
+
+        let currentCategory = localStorage.getItem('selectedCategory') || 'All'; // Retrieve saved category or default to 'All'
 
         function filterByCategory(category) {
             currentCategory = category;
+            localStorage.setItem('selectedCategory', category); // Save selected category
             const badges = document.querySelectorAll('.badge');
             badges.forEach(badge => {
                 badge.classList.toggle('active', badge.innerText === category);
@@ -233,16 +234,22 @@
 
         function clearSearch() {
             document.getElementById("search-input").value = "";
-            currentCategory = 'All';
-            document.querySelectorAll('.badge').forEach(badge => badge.classList.remove('active'));
-            document.querySelector('.badge').classList.add('active');
-            filterBooks();
+            filterBooks(); // Do not reset category to 'All' to retain current filter selection
         }
 
         function toggleFilter() {
             const filterContainer = document.getElementById("filter-container");
             filterContainer.style.display = filterContainer.style.display === "none" || filterContainer.style.display === "" ? "flex" : "none";
         }
+
+        // On page load, apply the last selected category filter
+        document.addEventListener('DOMContentLoaded', () => {
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
+                badge.classList.toggle('active', badge.innerText === currentCategory);
+            });
+            filterBooks();
+        });
 
         renderBooks(books);
     </script>
