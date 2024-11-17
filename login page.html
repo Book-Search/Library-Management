@@ -128,7 +128,16 @@
     </div>
 
     <script>
-        let isSignedUp = false;
+        function checkIfUserIsRegistered() {
+            const user = localStorage.getItem('user');
+            if (user) {
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('signupForm').classList.remove('active');
+            } else {
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+        }
 
         function showSignUp() {
             document.getElementById('loginForm').classList.remove('active');
@@ -136,26 +145,47 @@
         }
 
         function handleSignUp() {
-            // Simplified sign-up logic
-            isSignedUp = true;
+            const name = document.getElementById('signup-name').value;
+            const branch = document.getElementById('signup-branch').value;
+            const year = document.getElementById('signup-year').value;
+            const studentId = document.getElementById('signup-student-id').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            const user = {
+                name,
+                branch,
+                year,
+                studentId,
+                email,
+                password,
+            };
+
+            localStorage.setItem('user', JSON.stringify(user));
             alert('Sign-up successful! You can now log in.');
             document.getElementById('signupForm').classList.remove('active');
             document.getElementById('loginForm').classList.add('active');
         }
 
         function handleLogin() {
-            if (!isSignedUp) {
-                alert('Please create an account before logging in.');
-            } else {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+
+            if (storedUser && storedUser.email === email && storedUser.password === password) {
                 alert('Login successful!');
                 goToNextPage();
+            } else {
+                alert('Invalid email or password. Please try again.');
             }
         }
 
         function goToNextPage() {
-            // Redirect to the main page
             window.location.href = 'main page .html'; // Ensure the file path is correct
         }
+
+        // Initialize the form state on page load
+        checkIfUserIsRegistered();
     </script>
 </body>
 </html>
