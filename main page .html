@@ -8,9 +8,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            background-image: url('3-old-books-in-a-library-luoman.jpg');
             margin: 0;
             padding: 0;
+        }
+        title {
+            color: #eb0b0b;
         }
         .container {
             max-width: 1200px;
@@ -20,6 +23,7 @@
         h1 {
             font-size: 2rem;
             margin-bottom: 20px;
+            color: #fbfbfb;
         }
         .flex {
             display: flex;
@@ -121,13 +125,24 @@
             <span class="badge" onclick="filterByCategory('Vedic Maths')">Vedic Maths</span>
             <span class="badge" onclick="filterByCategory('Computer Science')">Computer Science</span>
             <span class="badge" onclick="filterByCategory('IOT')">IOT</span>
+            <span class="badge" onclick="filterByCategory('BIOLOGY')">BIOLOGY</span>
             <span class="badge" onclick="filterByCategory('Civil Engineering')">Civil Engineering</span>
         </div>
         <div id="book-list" class="grid">
             <!-- Books will be dynamically loaded here -->
         </div>
     </div>
-    <script>
+    <script> 
+    const subjectColors = {
+        "Computer Science": "#FF5733", // Example: Orange
+        "Physics": "#3498DB", // Example: Blue
+        "Maths": "#2ECC71", // Example: Green
+        "Vedic Maths": "#9B59B6", // Example: Purple
+        "IOT": "#F1C40F", // Example: Yellow
+        "Chemistry": "#E67E22", // Example: Deep Orange
+        "Biology": "#1ABC9C", // Example: Teal
+        "Civil Engineering": "#34495E" // Example: Dark Gray
+    };
         const books = [ 
 
 { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
@@ -216,20 +231,22 @@
         }
 
         function renderBooks(bookList) {
-            const bookListContainer = document.getElementById("book-list");
-            bookListContainer.innerHTML = '';
-            bookList.forEach(book => {
-                const bookCard = document.createElement('div');
-                bookCard.className = 'card';
-                bookCard.innerHTML = `
-                    <div class="card-title">${book.title}</div>
-                    <p>Author: ${book.author}</p>
-                    <p>Year: ${book.year}</p>
-                    <a href="m page 2.html?id=${book.id}" class="button">View Details</a>
-                `;
-                bookListContainer.appendChild(bookCard);
-            });
-        }
+        const bookListContainer = document.getElementById("book-list");
+        bookListContainer.innerHTML = '';
+        bookList.forEach(book => {
+            const bookCard = document.createElement('div');
+            bookCard.className = 'card';
+            bookCard.style.backgroundColor = subjectColors[book.category] || "#FFFFFF"; // Default to white if no color is defined
+            bookCard.style.color = "#FFFFFF"; // Set text color to white for contrast
+            bookCard.innerHTML = `
+                <div class="card-title">${book.title}</div>
+                <p>Author: ${book.author}</p>
+                <p>Year: ${book.year}</p>
+                <a href="m page 2.html?id=${book.id}" class="button">View Details</a>
+            `;
+            bookListContainer.appendChild(bookCard);
+        });
+    }
 
         function clearSearch() {
             document.getElementById("search-input").value = "";
