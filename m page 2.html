@@ -1,274 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Book Search</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Book Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('3-old-books-in-a-library-luoman.jpg');
+            background-color: #f7f7f7;
             margin: 0;
             padding: 0;
         }
-        title {
-            color: #eb0b0b;
-        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #fbfbfb;
-        }
-        .flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+
         .button {
-            padding: 10px 15px;
+            padding: 10px;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
+            border-radius: 4px;
             text-decoration: none;
-            transition: background-color 0.3s;
         }
+
         .button:hover {
             background-color: #0056b3;
         }
-        .gap-2 {
-            gap: 10px;
-        }
-        .filter-bar {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .badge {
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-right: 10px;
-            background-color: white;
-        }
-        .badge:hover {
-            background-color: #f0f0f0;
-        }
-        .badge.active {
-            background-color: #007bff;
-            color: white;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+
         .card {
             background-color: white;
             padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            margin-bottom: 20px;
+            border-radius: 8px;
         }
-        .card:hover {
-            transform: translateY(-2px);
-        }
-        .card-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .search-container {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-        .search-input-container {
-            flex-grow: 1;
+
+        h2 {
+            margin-top: 0;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="flex mb-4">
-            <h1>Library Book Search</h1>
-            <a href="service page.html" class="button" aria-label="Service Page">Service</a>
+        <div id="book-details" class="card">
+            <!-- Book details will be dynamically loaded here -->
         </div>
-        <div class="search-container mb-4">
-            <div class="search-input-container">
-                <input type="text" id="search-input" placeholder="Search for a book..." onkeyup="filterBooks()">
-            </div>
-            <button class="button" onclick="clearSearch()" aria-label="Clear Search">Clear</button>
-        </div>
-        <button class="button" onclick="toggleFilter()" aria-label="Filter Categories">Filter Categories</button>
-        <div id="filter-container" class="filter-bar">
-            <span class="badge" onclick="filterByCategory('All')">All</span>
-            <span class="badge" onclick="filterByCategory('Maths')">Maths</span>
-            <span class="badge" onclick="filterByCategory('Physics')">Physics</span>
-            <span class="badge" onclick="filterByCategory('Chemistry')">Chemistry</span>
-            <span class="badge" onclick="filterByCategory('Vedic Maths')">Vedic Maths</span>
-            <span class="badge" onclick="filterByCategory('Computer Science')">Computer Science</span>
-            <span class="badge" onclick="filterByCategory('IOT')">IOT</span>
-            <span class="badge" onclick="filterByCategory('BIOLOGY')">BIOLOGY</span>
-            <span class="badge" onclick="filterByCategory('Civil Engineering')">Civil Engineering</span>
-        </div>
-        <div id="book-list" class="grid">
-            <!-- Books will be dynamically loaded here -->
-        </div>
+        <a href="main page .html" class="button">Back to Search</a>
     </div>
-    <script> 
-    const subjectColors = {
-        "Computer Science": "#FF5733", // Example: Orange
-        "Physics": "#3498DB", // Example: Blue
-        "Maths": "#2ECC71", // Example: Green
-        "Vedic Maths": "#9B59B6", // Example: Purple
-        "IOT": "#F1C40F", // Example: Yellow
-        "Chemistry": "#E67E22", // Example: Deep Orange
-        "Biology": "#1ABC9C", // Example: Teal
-        "Civil Engineering": "#34495E" // Example: Dark Gray
-    };
-        const books = [ 
 
-{ id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
-{ id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", year: 2006, category: "Computer Science" },
-{ id: 3, title: "Physics of the Impossible", author: "Michio Kaku", year: 2008, category: "Physics" },
-{ id: 4, title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, category: "Physics" },
-{ id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", year: 1965, category: "Vedic Maths" },
-{ id: 6, title: "Internet of Things", author: "Samuel Greengard", year: 2015, category: "IOT" },
-{ id: 7, title: "Calculus", author: "James Stewart", year: 2015, category: "Maths" },
-{ id: 8, title: "Trigonometry", author: "The Great Lekarz", year: 2012, category: "Maths" },
-{ id: 9, title: "The C Programming Language: ANSI C Version", author: "Brian W. Kernighan, Dennis M. Ritchie", year: 2015, category: "Computer Science" },
-{ id: 10, title: "Data Structures and Program Design in C, 4th Edition", author: "Robert L. Kruse", year: 2006, category: "Computer Science" },
-{ id: 11, title: "Internet of Things", author: "Rajkamal", year: 2004, category: "IOT" },
-{ id: 12, title: "Internet of Things (A Hands-On Approach)", author: "Vijay Madisetti, Arshdeep Bahga", year: 2015, category: "IOT" },
-{ id: 13, title: "The Internet of Things: Connecting Objects", author: "M. Rama Lingham", year: 2016, category: "IOT" },
-{ id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G. Manolakis", year: 2012, category: "IOT" },
-{ id: 15, title: "Wireless Communications and Networking", author: "Vijay K. Garg", year: 2020, category: "IOT" },
-{ id: 16, title: "Introduction to Radar Systems", author: "Merrill I. Skolnik", year: 2000, category: "IOT" },
-{ id: 17, title: "Wireless Sensor Network", author: "Leonidas Guibas", year: 2021, category: "IOT" },
-{ id: 18, title: "Fiber-optic Communication System", author: "Govind P. Agarwal", year: 2006, category: "IOT" },
-{ id: 19, title: "Introduction to Wireless & Mobile System", author: "Dharma Prakash Agarwal", year: 2004, category: "IOT" },
-{ id: 20, title: "Satellite Communication System", author: "M. Richharia", year: 1999, category: "IOT" },
-{ id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", year: 2001, category: "IOT" },
-{ id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", year: 2003, category: "IOT" },
-{ id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", year: 2020, category: "IOT" },
-{ id: 24, title: "Chemistry in Engineering", author: "J.C. Kuriacose", year: 2012, category: "Chemistry" },
-{ id: 25, title: "Engineering Chemistry 17th Edition", author: "Dhanpat Rai", year: 2008, category: "Chemistry" },
-{ id: 26, title: "Organic Chemistry Seventh Edition", author: "Francis A. Carey", year: 2004, category: "Chemistry" },
-{ id: 27, title: "Organic Chemistry Fifth Edition", author: "Stanley H. Pine", year: 2006, category: "Chemistry" },
-{ id: 28, title: "Environmental Chemistry Fifth Edition", author: "A.K. De", year: 2003, category: "Chemistry" },
-{ id: 29, title: "Organic Reactions and their Mechanisms", author: "P.S. Kalsi", year: 2002, category: "Chemistry" },
-{ id: 30, title: "Chemistry for Engineers and Technologies", author: "H.D. Gasser", year: 2005, category: "Chemistry" },
-{ id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, category: "Chemistry" },
-{ id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, category: "Chemistry" },
-{ id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, category: "Chemistry" },
-{ id: 34, title: "Copilers-Principle,techniques and Tool-Second Edition", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
-{ id: 35, title: "The Standard C Library", author: "P.J. Plauger", year:2017 , category: "Computer Science" },
-{ id: 36, title: "modern compiler implementation in c", author: "Andrew Appel", year: 1999, category: "Computer Science" },
-{ id: 37, title: "Data Structures and Algorithm Analysis in C", author: "Mark Allen weiss", year:2018 , category: "Computer Science" },
-{ id: 38, title: "C in Depth", author: "Deepali Srivastava", year:2009 , category: "Computer Science" },
+    <script>
+        const books = [
+            { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", price: 80, year: 2009, location: "Floor 2, Row A", category: "Computer Science" },
+            { id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", price: 70, year: 2006, location: "Floor 1, Row B", category: "Computer Science" },
+            { id: 3, title: "Physics of the Impossible", author: "Michio Kaku", price: 15, year: 2008, location: "Floor 1, Row C", category: "Physics" },
+            { id: 4, title: "A Brief History of Time", author: "Stephen Hawking", price: 10, year: 1988, location: "Floor 1, Row B", category: "Physics" },
+            { id: 5, title: "Vedic Mathematics", author: "Bharati Krishna Tirthaji", price: 12, year: 1965, location: "Floor 3, Row D", category: "Vedic Maths" },
+            { id: 6, title: "Internet of Things", author: "Samuel Greengard", price: 20, year: 2015, location: "Floor 2, Row B", category: "IOT" },
+            { id: 7, title: "Calculus", author: "James Stewart", price: 200, year: 2015, location: "Floor 3, Row A", category: "Maths" },
+            { id: 8, title: "Trigonometry Laws", author: "The Great Lekarz", price: 420, year: 2002, location: "Floor 2, Row D", category: "Arts" },
+            { id: 9, title: "The C Programming Language: ANSI C Version", author: "Brian W. Kernighan, Dennis M. Ritchie", price: 643, year: 2015, location: "Floor G, Row D", category: "Computer Science" },
+            { id: 10, title: "Data Structures and Program Design in C, 4th Edition", author: "Robert Kruse, C. L. Tondo, Bruce Leung, Shashi Mogalla", price: 680, year: 2006, location: "Floor 1, Row B", category: "Computer Science" },
+            { id: 11, title: "Internet of Things", author: "Rajkamal, Tata McGraw Hill", price: 620, year: 2004, location: "Floor 1, Row A", category: "IOT" },
+            { id: 12, title: "Internet of Things (A Hands-On Approach)", author: "Vijay Madisetti and Arshdeep Bahga", price: 700, year: 2015, location: "Floor 3, Row B", category: "IOT" },
+            { id: 13, title: "The Internet of Things: Connecting Objects", author: "M. Rama Lingham", price: 220, year: 2016, location: "Ground Floor, Rack 24, I5", category: "IOT" },
+            { id: 14, title: "Applied Digital Signal Processing", author: "Dimitris G. Manolakis", price: 120, year: 2012, location: "Ground Floor, Row 24-I5", category: "IOT" },
+            { id: 15, title: "Wireless Communications and Networking", author: "Vijay K. Garg", price: 500, year: 2020, location: "Ground Floor, Row 25-H3", category: "IOT" },
+            { id: 16, title: "Introduction to Radar Systems", author: "Merrill I. Skolnik", price: 420, year: 2000, location: "Ground Floor, Row 25-I4", category: "IOT" },
+            { id: 17, title: "Wireless Sensor Network", author: "Leonidas Guibas", price: 320, year: 2021, location: "Ground Floor, Row 25-G3", category: "IOT" },
+            { id: 18, title: "Fiber-optic Communication System", author: "Govind P. Agarwal", price: 100, year: 2006, location: "Ground Floor, Row 24-R3", category: "IOT" },
+            { id: 19, title: "Introduction to Wireless & Mobile Systems", author: "Dharma Prakash Agarwal", price: 190, year: 2004, location: "Ground Floor, Row 25-H5", category: "IOT" },
+            { id: 20, title: "Satellite Communication System", author: "M. Richharia", price: 300, year: 1999, location: "Ground Floor, Row 24-N4", category: "IOT" },
+            { id: 21, title: "Antenna Measurement Techniques", author: "Gary E. Evans", price: 220, year: 2001, location: "Ground Floor, Row 25-F4", category: "IOT" },
+            { id: 22, title: "Signals and Systems", author: "Alan V. Oppenheim, Alan S. Willsky", price: 590, year: 2003, location: "Ground Floor, Row 23-L3", category: "IOT" },
+            { id: 23, title: "Advanced Electronic Communications System", author: "Wayne Tomasi", price: 295, year: 2020, location: "Ground Floor, Row 22-K4", category: "IOT" },
+            { id: 24, title: "Chemistry in Engineering", author: "J. C. Kuriacose", year: 2012, price: 489, location: "Ground Floor, Row 32-I4", category: "Chemistry" },
+            { id: 25, title: "Engineering Chemistry 17th Edition", author: "Dhanpat Rai", year: 2008, price: 470, location: "Ground Floor, Row 32-K3", category: "Chemistry" },
+            { id: 26, title: "Organic Chemistry Seventh Edition", author: "Francis A. Carey", year: 2004, price: 500, location: "Ground Floor, Row 33-F4", category: "Chemistry" },
+            { id: 27, title: "Organic Chemistry Fifth Edition", author: "Stanley H. Pine", year: 2006, price: 540, location: "Ground Floor, Row 33-F2", category: "Chemistry" },
+            { id: 28, title: "Environmental Chemistry Fifth Edition", author: "A. K. De", year: 2003, price: 600, location: "Ground Floor, Row 33-H2", category: "Chemistry" },
+            { id: 29, title: "Organic Reactions and Their Mechanisms", author: "P. S. Kalsi", year: 2002, price: 490, location: "Ground Floor, Row 33-G4", category: "Chemistry" },
+            { id: 30, title: "Chemistry for Engineers and Technologies", author: "H. D. Gasser", year: 2005, price: 800, location: "Ground Floor, Row 33-H5", category: "Chemistry" },
+            { id: 31, title: "Molecular Modelling", author: "Andrew R. Leach", year: 2008, price: 500, location: "Ground Floor, Row 33-E4", category: "Chemistry" },
+            { id: 32, title: "Engineering Chemistry", author: "B. Sivasankar", year: 2007, price: 750, location: "Ground Floor, Row 33-A3", category: "Chemistry" },
+            { id: 33, title: "Engineering Chemistry", author: "Dr. P. Kalyani", year: 2009, price: 400, location: "Ground Floor, Row 33-A6", category: "Chemistry" },
+            { id: 34, title: "Compilers-Principles, techniques, and Tools-Second Edition", author: "Alfred V. Aho, Monica S. Lam, Ravi Sethi, Jeffrey D. Ullman", price: 750, year: 2013, location: "Floor G, Rack 11 P4", category: "Computer Science" },
+            { id: 35, title: "The Standard C Library", author: "P.J. Plauger", price: 495, year: 2017, location: "Floor F, Rack 11 P7", category: "Computer Science" },
+            { id: 36, title: "Modern Compiler Implementation in C", author: "Andrew Appel", price: 445, year: 1999, location: "Floor G, Rack 11 T2", category: "Computer Science" },
+            { id: 37, title: "Data Structures and Algorithm Analysis in C", author: "Mark Allen Weiss", price: 699, year: 2018, location: "Floor G, Rack 12 C1", category: "Computer Science" },
+            { id: 38, title: "C in Depth", author: "Deepali Srivastava", price: 999, year: 2009, location: "Floor G, Rack 11 C9", category: "Computer Science" },
+            { id: 39, title: "Advanced Engineering Mathematics-5th Edition", author: "R.K. Jain, S.R.K. Iyengar", price: 1250, year: 2016, location: "Floor 1, Rack 30 F4", category: "Maths" },
+            { id: 40, title: "Discrete Mathematics for Computer Scientists and Mathematicians", author: "Joe L. Mott, Abraham Kandel, Theodore P. Baker", price: 200, year: 2015, location: "Floor 1, Rack 30 H5", category: "Maths" },
+            { id: 41, title: "Advanced Engineering Mathematics-4th Edition", author: "R.K. Jain and S.R.K. Iyengar", price: null, year: 2002, location: "Floor 1, Rack 30 D2", category: "Maths" },
+            { id: 42, title: "Higher Engineering Mathematics", author: "Dr. B.S. Grewal", price: 469, year: 2018, location: "Floor G, Rack 29 H3", category: "Maths" },
+            { id: 43, title: "Data Structures and Program Design in C, 4th Edition", author: "Anthony Croft, Robert Davison, Martin Hargreaves", price: 589, year: 2009, location: "Floor 1, Rack 29 E4", category: "Maths" },
+            { id: 44, title: "Engineering Mathematics - Volume 2", author: "Meena Kumari", price: 900, year: 2015, location: "Floor 1, Rack 29 E5", category: "Maths" },
+            { id: 45, title: "Fourth Edition-Engineering Mathematics - Volume 2", author: "S.S. Sastry", price: 245, year: 2014, location: "Floor 1, Rack 29 E5", category: "Maths" },
+            { id: 46, title: "Engineering Mathematics", author: "Ravish R Singh, Mukul Bhatt", price: 900, year: 2017, location: "Floor 1, Rack 29 E2", category: "Maths" },
+            { id: 47, title: "Advanced Engineering Mathematics-2nd Edition", author: "Michael Greenberg", price: 1007, year: 2006, location: "Floor 1, Rack 30 A3", category: "Maths" },
+            { id: 48, title: "Brock Biology of Microorganisms", author: "John M. Martinko, Kelly S. Bender, Daniel H. Buckley, David A. Stahi", price: 1725, year: 2002, location: "Floor 1, Rack 34 F4", category: "Biology" },
+            { id: 49, title: "Microbiology", author: "Michael J. Pelczar, Jr. E.C.S. Chan, Noel R. Krieg", price: 1199, year: 2001, location: "Floor 1, Rack 34 G3", category: "Biology" },
+            { id: 50, title: "Cell Biology, Genetics, Molecular Biology, Evolution and Ecology", author: "P.S. Verma, V.K. Agarwal", price: 985, year: 2004, location: "Floor 1, Rack 34 F2", category: "Biology" },
+            { id: 51, title: "Biochemistry", author: "Jeremy M. Berg, John L. Tymoczko, Lubert Stryer", price: 6370, year: 2006, location: "Floor 1, Rack 33 J5", category: "Biology" },
+            { id: 52, title: "Biochemistry", author: "U. Satyanarayana, U. Chakrapani", price: 1527, year: 2017, location: "Floor 1, Rack 33 J6", category: "Biology" },
+            { id: 53, title: "Design of Reinforced Concrete Structures-5th Edition", author: "P. Dayaratnam, P. Sarah", price: 595, year: 2017, location: "Floor 1, Rack 53 G4", category: "Civil Engineering" },
+            { id: 54, title: "Advanced Reinforced Concrete Design", author: "P.C. Varghese", price: 250, year: 2010, location: "Floor 1, Rack 53 E4", category: "Civil Engineering" },
+            { id: 55, title: "Concrete Technology-Theory and Practice", author: "M.S. Shetty", price: 540, year: 2014, location: "Floor 1, Rack 53 D3", category: "Civil Engineering" },
+            { id: 56, title: "Prestressed Concrete Bridges", author: "N. Krishna Raju", price: 570, year: 2016, location: "Floor 1, Rack 53 C3", category: "Civil Engineering" },
+            { id: 57, title: "Civil Engineering Pocket Book", author: "Suresh C. Biradar", price: 294, year: 2024, location: "Floor 1, Rack 53 C1", category: "Civil Engineering" }
+        ];
 
-{ id: 39, title: "Advanced Engineering Mahematics-5th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2016 ,category:"Maths"},
-{ id: 40, title: "Discrete Mathematics for Computer Scientists And Mathematicians", author:"R.K Jain and S.R.K.Iyengar", year:2002 ,category:"Maths"},
-{ id: 41, title: "Advanced Engineering Mathematics-4th edition", author:"R.K. Jain,S.R.K.Iyengar", year:2002 ,category:"Maths"},
-{ id: 42, title: "Higher engineering Mathematics", author:"Dr.B.S.Grewal", year:2018 ,category:"Maths"},
-{ id: 43, title: "Data structures and Program Design in C , 4th Edition", author:"Anthony Croft,Robert Davison,Martin Hargreaves", year: 2009,category:"Maths"},
-{ id: 44, title: "Engineering Mathematics-volume 2", author:"Meena Kumari", year:2015 ,category:"Maths"},
-{ id: 45, title: "Fourth edition-Engineering Mathematics-volume 2", author:"S.S.Sastry", year:2014 ,category:"Maths"},
-{ id: 46, title: "Engineering Mathematics", author:"Ravish R Singh,Mukul Bhatt", year:2017 ,category:"Maths"},
-{ id: 47, title: "Advanced Engineering Mathematics", author:"Michael Greenberg", year:2006 ,category:"Maths"},
+        function getBookDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = parseInt(urlParams.get('id'), 10);
+            const book = books.find(b => b.id === bookId);
 
-{ id: 48, title: "Brock Biology of Microorganisms", author:"John M.Martinko,Kelly S.Bender,Daniel H.Buckley,David A.Stahi", year:2002  ,category:"Biology"},
-{ id: 49, title: "Microbiology", author:"Michael J.Pelczar,Jr.E.C.S.Chan,Noel R.Krieg", year:2001 ,category:"Biology"},
-{ id: 50, title: "Cell Biology,Genetics,Molecular Biology,Evolution and Ecology", author:"P.S.Verma,V.K. Agarwal", year:2004 ,category:"Biology"},
-{ id: 51, title: "Biochemistry", author:"Jeremy M.Berg,John L.Tymoczko,Lubert Stryer", year:2006 ,category:"Biology"},
-{ id: 52, title: "Biochemistry", author:"U.Satyanarayana,U.Chakrapani", year:2017 ,category:"Biology"},
-
-{ id: 53, title: "Design of Reinforced Cocrete Structures-5th edition", author:"P.Dayaratnam,P.Sarah", year:2017 ,category:"Civil Engineering"},
-{ id: 54, title: "Advanced Reinforced Concrete Design", author:"P.C.Varghese", year:2010 ,category:"Civil Engineering"},
-{ id: 55, title: "Concrete Technology-Theory and Practice", author:"M.S.Shetty", year:2014 ,category:"Civil Engineering"},
-{ id: 56, title: "Prestressed Concrete Bridges", author:"N.Krishna Raju", year:2016 ,category:"Civil Engineering"},
-{ id: 57, title: "Civil Engineering-pocket book", author:"Suresh .C .Biradar", year:2024 ,category:"Civil Engineering"},
- ];
-
-        let currentCategory = localStorage.getItem('selectedCategory') || 'All'; // Retrieve saved category or default to 'All'
-
-        function filterByCategory(category) {
-            currentCategory = category;
-            localStorage.setItem('selectedCategory', category); // Save selected category
-            const badges = document.querySelectorAll('.badge');
-            badges.forEach(badge => {
-                badge.classList.toggle('active', badge.innerText === category);
-            });
-            filterBooks();
+            if (book) {
+                const bookDetailsContainer = document.getElementById("book-details");
+                bookDetailsContainer.innerHTML = `
+                    <h2>${book.title}</h2>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Price:</strong> ₹${book.price ? book.price : 'N/A'}</p>
+                    <p><strong>Year:</strong> ${book.year}</p>
+                    <p><strong>Location:</strong> ${book.location}</p>
+                    <p><strong>Category:</strong> ${book.category}</p>
+                `;
+            } else {
+                document.getElementById("book-details").innerHTML = "<p>Book not found.</p>";
+            }
         }
 
-        function filterBooks() {
-            const searchTerm = document.getElementById("search-input").value.toLowerCase();
-            const filteredBooks = books.filter(book => {
-                return (
-                    (book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm)) &&
-                    (currentCategory === 'All' || book.category === currentCategory)
-                );
-            });
-            renderBooks(filteredBooks);
-        }
-
-        function renderBooks(bookList) {
-        const bookListContainer = document.getElementById("book-list");
-        bookListContainer.innerHTML = '';
-        bookList.forEach(book => {
-            const bookCard = document.createElement('div');
-            bookCard.className = 'card';
-            bookCard.style.backgroundColor = subjectColors[book.category] || "#FFFFFF"; // Default to white if no color is defined
-            bookCard.style.color = "#FFFFFF"; // Set text color to white for contrast
-            bookCard.innerHTML = `
-                <div class="card-title">${book.title}</div>
-                <p>Author: ${book.author}</p>
-                <p>Year: ${book.year}</p>
-                <a href="m page 2.html?id=${book.id}" class="button">View Details</a>
-            `;
-            bookListContainer.appendChild(bookCard);
-        });
-    }
-
-        function clearSearch() {
-            document.getElementById("search-input").value = "";
-            filterBooks(); // Do not reset category to 'All' to retain current filter selection
-        }
-
-        function toggleFilter() {
-            const filterContainer = document.getElementById("filter-container");
-            filterContainer.style.display = filterContainer.style.display === "none" || filterContainer.style.display === "" ? "flex" : "none";
-        }
-
-        // On page load, apply the last selected category filter
-        document.addEventListener('DOMContentLoaded', () => {
-            const badges = document.querySelectorAll('.badge');
-            badges.forEach(badge => {
-                badge.classList.toggle('active', badge.innerText === currentCategory);
-            });
-            filterBooks();
-        });
-
-        renderBooks(books);
+        // Call the function to display book details
+        getBookDetails();
     </script>
 </body>
-</html>
 
+</html>
