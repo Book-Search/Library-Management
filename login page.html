@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative;
         }
         .container {
             background: #fff;
@@ -66,10 +67,32 @@
         form.active {
             display: block;
         }
+
+        /* Style for the Service button */
+        .service-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .service-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Service Button -->
+        <button class="service-btn" onclick="goToServicePage()">Services</button>
+        
         <h1>Library Management System</h1>
         <form id="loginForm" class="active">
             <h2>TECH TITANS</h2>
@@ -184,8 +207,14 @@
             window.location.href = 'main page .html'; // Ensure the file path is correct
         }
 
+        // Function to redirect to the Services page
+        function goToServicePage() {
+            window.location.href = 'service page.html'; // Ensure the file path is correct
+        }
+
         // Initialize the form state on page load
         checkIfUserIsRegistered();
     </script>
 </body>
 </html>
+
