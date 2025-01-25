@@ -56,7 +56,7 @@
       transition: background-color 0.3s; /* Added transition for button */
     }
     .button:hover {
-      background-color: #ff0000; /* Darker blue on hover */
+      background-color: #d40000; /* Darker red on hover */
     }
   </style>
 </head>
@@ -67,12 +67,12 @@
   <div class="card">
     <h1>WELCOME TO<br>LIBRARY MANAGEMENT SYSTEM</h1>
     <p>Your gateway to knowledge and academic excellence. Explore our vast collection of books, journals, and digital resources.</p>
-    <button class="button" onclick="goToNextPage()">Continue</button>
+    <button class="button" onclick="goToLoginPage()">Continue</button>
   </div>
 
   <script>
-    function goToNextPage() {
-      // Redirect to the main page
+    function goToLoginPage() {
+      // Redirect to the login page
       window.location.href = 'login page.html'; // Ensure the file path is correct
     }
   </script>
