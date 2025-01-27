@@ -1,158 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Library Auth System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
-             background-image: url('3-old-books-in-a-library-luoman.jpg'); /* Ensure the path is correct */
-           margin: 30;
-            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 20 auto;
+            background: #fff;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
         }
 
         h1 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-        }
-
-        .flex {
+            text-align: center;
+            margin-bottom: 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            font-size: 24px;
         }
 
-        .button {
-            padding: 10px 15px;
+        .services-link {
+            font-size: 14px;
+            color: #007bff;
+            margin-left: 10px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .services-link:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .btn {
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
-        .button:hover {
-            background-color: #0056b3;
+        .link {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 40px;
+        form {
+            display: none;
         }
 
-        .card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-        }
-
-        .card-header {
-            font-weight: bold;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-        }
-
-        .card-content {
-            font-size: 14px;
-        }
-
-        .emergency-card {
-            background-color: #ffebee;
-            border-left: 5px solid #f44336;
+        form.active {
+            display: block;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <div class="flex mb-4">
-            <h1>Library Services</h1>
-            <a href="login page.html" class="button">Back to Search</a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-phone-alt mr-2"></i> Librarian Support
-                </div>
-                <div class="card-content">
-                    <p>Need assistance? Contact our librarian for support:</p>
-                    <p>Dr. K TATA RAO SIR LIBRARY HEAD</p>
-                    <p class="font-bold mt-2">Phone: 08645 - 350200 </p>
-                    <p class="text-sm text-muted">Available Monday to Friday, 9:00 AM - 5:00 PM</p>
-                </div>
-            </div>
-            <div class="card emergency-card">
-                <div class="card-header" style="color: #d32f2f;">
-                    <i class="fas fa-exclamation-triangle mr-2"></i> Emergency Contact
-                </div>
-                <div class="card-content">
-                    <p>For emergencies within the library premises:</p>
-                    <p class="font-bold mt-2">Emergency: 08645 - 350200</p>
-                    <p class="text-sm" style="color: #d32f2f;">Available 24/7 for urgent situations</p>
-                </div>
-            </div>
+        <h1>
+            Library Management System
+            <a href="login service page.html" class="services-link">Services</a>
+        </h1>
 
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="card">
-                <div class="card-header">Book Reservation</div>
-                <div class="card-content">
-                    <p>Reserve books online for pickup</p>
-                </div>
-                
+        <form id="loginForm" class="active">
+            <h2>TECH TITANS</h2>
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
             </div>
-            <div class="card">
-                <div class="card-header">Inter-Library Loan</div>
-                <div class="card-content">
-                    <p>Request books from other libraries</p>
-                </div>
-                
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
             </div>
-            <div class="card">
-                <div class="card-header">Study Room Booking</div>
-                <div class="card-content">
-                    <p>Book a private study room</p>
-                </div>
+            <button type="button" onclick="handleLogin()" class="btn">Login</button>
+            <span class="link" onclick="showSignUp()">Create an Account</span>
+        </form>
+
+        <form id="signupForm">
+            <h2>TECH TITANS</h2>
+            <div class="form-group">
+                <label for="signup-name">Name</label>
+                <input type="text" id="signup-name" placeholder="Enter your full name" required>
             </div>
-            <div class="card">
-                <div class="card-header">Research Assistance</div>
-                <div class="card-content">
-                    <p>Get help with your research from our librarians</p>
-                </div>
+            <div class="form-group">
+                <label for="signup-branch">Branch</label>
+                <select id="signup-branch" required>
+                    <option value="" disabled selected>Select branch</option>
+                    <option value="cs">Computer Science</option>
+                    <option value="ee">Electrical Engineering</option>
+                    <option value="me">Mechanical Engineering</option>
+                    <option value="ce">Civil Engineering</option>
+                </select>
             </div>
-            <div class="card">
-                <div class="card-header">Printing and Scanning</div>
-                <div class="card-content">
-                    <p>Use our printing and scanning facilities</p>
-                </div>
+            <div class="form-group">
+                <label for="signup-year">Year</label>
+                <select id="signup-year" required>
+                    <option value="" disabled selected>Select year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
             </div>
-            <div class="card">
-                <div class="card-header">Digital Resource Access</div>
-                <div class="card-content">
-                    <p>Access our online databases and e-books</p>
-                </div>
+            <div class="form-group">
+                <label for="signup-student-id">Student ID Number</label>
+                <input type="text" id="signup-student-id" placeholder="Enter your student ID" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="Create a password" required>
+            </div>
+            <button type="button" onclick="handleSignUp()" class="btn">Sign Up</button>
+        </form>
     </div>
-</body>
 
+    <script>
+        function checkIfUserIsRegistered() {
+            const user = localStorage.getItem('user');
+            if (user) {
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('signupForm').classList.remove('active');
+            } else {
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+        }
+
+        function showSignUp() {
+            document.getElementById('loginForm').classList.remove('active');
+            document.getElementById('signupForm').classList.add('active');
+        }
+
+        function handleSignUp() {
+            const name = document.getElementById('signup-name').value;
+            const branch = document.getElementById('signup-branch').value;
+            const year = document.getElementById('signup-year').value;
+            const studentId = document.getElementById('signup-student-id').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            const user = {
+                name,
+                branch,
+                year,
+                studentId,
+                email,
+                password,
+            };
+
+            localStorage.setItem('user', JSON.stringify(user));
+            alert('Sign-up successful! You can now log in.');
+            document.getElementById('signupForm').classList.remove('active');
+            document.getElementById('loginForm').classList.add('active');
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+
+            if (storedUser && storedUser.email === email && storedUser.password === password) {
+                alert('Login successful!');
+                goToNextPage();
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        }
+
+        function goToNextPage() {
+            window.location.href = 'main page .html';
+        }
+    </script>
+</body>
 </html>
+
