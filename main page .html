@@ -108,10 +108,7 @@
     <div class="container">
         <div class="flex mb-4">
             <h1>Library Book Search</h1>
-            <div class="gap-2">
-                <a href="service page.html" class="button" aria-label="Service Page">Service</a>
-                <a href="music.html" class="button" aria-label="Music Page">Music</a> <!-- New music button -->
-            </div>
+            <a href="service page.html" class="button" aria-label="Service Page">Service</a>
         </div>
         <div class="search-container mb-4">
             <div class="search-input-container">
@@ -146,7 +143,7 @@
         "Biology": "#1ABC9C", // Example: Teal
         "Civil Engineering": "#34495E" // Example: Dark Gray
     };
-      const books = [ 
+        const books = [ 
 
 { id: 1, title: "Introduction to Algorithms", author: "Thomas H. Cormen", year: 2009, category: "Computer Science" },
 { id: 2, title: "Introduction to C Programming", author: "Thomas Lekarz", year: 2006, category: "Computer Science" },
@@ -210,56 +207,59 @@
 { id: 57, title: "Civil Engineering-pocket book", author:"Suresh .C .Biradar", year:2024 ,category:"Civil Engineering"},
  ];
 
-let selectedCategory = 'All';
-let searchQuery = '';
+        let currentCategory = localStorage.getItem('selectedCategory') || 'All'; // Retrieve saved category or default to 'All'
 
-function filterBooks() {
-    searchQuery = document.getElementById('search-input').value.toLowerCase();
-    renderBooks();
-}
+        function filterByCategory(category) {
+            currentCategory = category;
+            localStorage.setItem('selectedCategory', category); // Save selected category
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
+                badge.classList.toggle('active', badge.innerText === category);
+            });
+            filterBooks();
+        }
 
-function clearSearch() {
-    document.getElementById('search-input').value = '';
-    searchQuery = '';
-    renderBooks();
-}
+        function filterBooks() {
+            const searchTerm = document.getElementById("search-input").value.toLowerCase();
+            const filteredBooks = books.filter(book => {
+                return (
+                    (book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm)) &&
+                    (currentCategory === 'All' || book.category === currentCategory)
+                );
+            });
+            renderBooks(filteredBooks);
+        }
 
-function toggleFilter() {
-    const filterContainer = document.getElementById('filter-container');
-    filterContainer.style.display = filterContainer.style.display === 'none' ? 'flex' : 'none';
-}
+        function renderBooks(bookList) {
+        const bookListContainer = document.getElementById("book-list");
+        bookListContainer.innerHTML = '';
+        bookList.forEach(book => {
+            const bookCard = document.createElement('div');
+            bookCard.className = 'card';
+            bookCard.style.backgroundColor = subjectColors[book.category] || "#FFFFFF"; // Default to white if no color is defined
+            bookCard.style.color = "#FFFFFF"; // Set text color to white for contrast
+            bookCard.innerHTML = `
+                <div class="card-title">${book.title}</div>
+                <p>Author: ${book.author}</p>
+                <p>Year: ${book.year}</p>
+                <a href="book-details.html?id=${book.id}" class="button">View Details</a>
+            `;
+            bookListContainer.appendChild(bookCard);
+        });
+    }
 
-function filterByCategory(category) {
-    selectedCategory = category;
-    renderBooks();
-    document.querySelectorAll('.badge').forEach(badge => badge.classList.remove('active'));
-    event.target.classList.add('active');
-}
+        function toggleFilter() {
+            const filterContainer = document.getElementById('filter-container');
+            filterContainer.style.display = filterContainer.style.display === 'none' ? 'flex' : 'none';
+        }
 
-function renderBooks() {
-    const bookList = document.getElementById('book-list');
-    bookList.innerHTML = '';
+        function clearSearch() {
+            document.getElementById("search-input").value = '';
+            filterBooks();
+        }
 
-    const filteredBooks = books.filter(book => {
-        const matchesCategory = selectedCategory === 'All' || book.category === selectedCategory;
-        const matchesSearch = book.title.toLowerCase().includes(searchQuery) || book.author.toLowerCase().includes(searchQuery);
-        return matchesCategory && matchesSearch;
-    });
-
-    filteredBooks.forEach(book => {
-        const bookCard = document.createElement('div');
-        bookCard.className = 'card';
-        bookCard.innerHTML = `
-            <h3 class="card-title" style="color: ${subjectColors[book.category] || '#000'}">${book.title}</h3>
-            <p>Author: ${book.author}</p>
-            <p>Year: ${book.year}</p>
-            <p>Category: ${book.category}</p>
-        `;
-        bookList.appendChild(bookCard);
-    });
-}
-
-window.onload = renderBooks;
+        // Initial rendering
+        renderBooks(books);
     </script>
 </body>
 </html>
