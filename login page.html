@@ -16,16 +16,7 @@
             margin: 0;
             position: relative;
         }
-        .button {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+
         .container {
             background: #fff;
             padding: 20px;
@@ -34,35 +25,55 @@
             width: 100%;
             max-width: 400px;
         }
-        h1, h2 {
+
+        h1 {
             text-align: center;
             margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
         }
+
+        .services-link {
+            font-size: 14px;
+            color: #007bff;
+            margin-left: 10px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .services-link:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
+
         input, select, button {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
             box-sizing: border-box;
         }
+
         .btn {
             background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
         }
-        .btn-outline {
-            background: white;
-            color: #007bff;
-            border: 1px solid #007bff;
-            cursor: pointer;
-        }
+
         .link {
             color: #007bff;
             cursor: pointer;
@@ -71,39 +82,23 @@
             margin-top: 10px;
             text-align: center;
         }
+
         form {
             display: none;
         }
+
         form.active {
             display: block;
-        }
-
-        /* Style for the Service button */
-        .service-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .service-btn:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Service Button -->
-        <button class="service-btn" onclick="goToServicePage()">Services</button>
-        
-        <h1>Library Management System</h1>
+        <h1>
+            Library Management System
+            <a href="login service page.html" class="services-link">Services</a>
+        </h1>
+
         <form id="loginForm" class="active">
             <h2>TECH TITANS</h2>
             <div class="form-group">
@@ -214,17 +209,8 @@
         }
 
         function goToNextPage() {
-            window.location.href = 'main page .html'; // Ensure the file path is correct
+            window.location.href = 'main page .html';
         }
-
-        // Function to redirect to the Services page
-        function goToServicePage() {
-            window.location.href = ' login service page.html'; // Ensure the file path is correct
-        }
-
-        // Initialize the form state on page load
-        checkIfUserIsRegistered();
     </script>
 </body>
 </html>
-
