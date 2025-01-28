@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #89CFF0, #FFB6C1);
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .player {
+            flex: 2;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .player h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: url('file:///C:/Users/hp/Pictures/kewwwwwwwwwww.jpg') no-repeat center/cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .controls button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #45a049;
+        }
+
+        .like {
+            background-color: #FF4081;
+        }
+
+        .like:hover {
+            background-color: #E91E63;
+        }
+
+        .player audio {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .playlist {
+            flex: 1;
+            background: #f4f4f4;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .playlist h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .playlist ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .playlist li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .playlist li:hover {
+            background: #e0e0e0;
+        }
+
+        .playlist li.active {
+            background: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="player">
+            <div class="avatar"></div>
+            <h1>Study Music Player</h1>
+            <div class="controls">
+                <button onclick="previousTrack()">Previous</button>
+                <button onclick="togglePlay()" id="playBtn">Play</button>
+                <button onclick="nextTrack()">Next</button>
+                <button class="like" onclick="likeTrack()">Like</button>
+            </div>
+            <audio id="audio" src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3"></audio>
+            <p id="trackTitle">Creative Minds - Bensound</p>
+        </div>
+        <div class="playlist">
+            <h2>Playlist</h2>
+            <ul id="trackList">
+                <li onclick="selectTrack(0)" class="active">Creative Minds - Bensound</li>
+                <li onclick="selectTrack(1)">Relaxing - Bensound</li>
+                <li onclick="selectTrack(2)">Sweet - Bensound</li>
+                <li onclick="selectTrack(3)">Acoustic Breeze - Bensound</li>
+                <li onclick="selectTrack(4)">Tenderness - Bensound</li>
+                <li onclick="selectTrack(5)">Once Again - Bensound</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const tracks = [
+            {
+                title: "Creative Minds - Bensound",
+                src: "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3"
+            },
+            {
+                title: "Relaxing - Bensound",
+                src: "https://www.bensound.com/bensound-music/bensound-relaxing.mp3"
+            },
+            {
+                title: "Sweet - Bensound",
+                src: "https://www.bensound.com/bensound-music/bensound-sweet.mp3"
+            },
+            {
+                title: "Acoustic Breeze - Bensound",
+                src: "https://www.bensound.com/bensound-music/bensound-acousticbreeze.mp3"
+            },
+            {
+                title: "Tenderness - Bensound",
+                src: "https://www.bensound.com/bensound-music/bensound-tenderness.mp3"
+            },
+            {
+                title: "Once Again - Bensound",
+                src: "https://www.bensound.com/bensound-music/bensound-onceagain.mp3"
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('playBtn');
+        const trackTitle = document.getElementById('trackTitle');
+        const trackList = document.getElementById('trackList');
+
+        function updateTrack() {
+            audio.src = tracks[currentTrackIndex].src;
+            trackTitle.textContent = tracks[currentTrackIndex].title;
+            updatePlaylistUI();
+            if (!audio.paused) {
+                audio.play();
+            }
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = 'Pause';
+            } else {
+                audio.pause();
+                playBtn.textContent = 'Play';
+            }
+        }
+
+        function previousTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+            updateTrack();
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            updateTrack();
+        }
+
+        function selectTrack(index) {
+            currentTrackIndex = index;
+            updateTrack();
+            audio.play();
+            playBtn.textContent = 'Pause';
+        }
+
+        function likeTrack() {
+            alert(`You liked: ${tracks[currentTrackIndex].title}`);
+        }
+
+        function updatePlaylistUI() {
+            const items = trackList.querySelectorAll('li');
+            items.forEach((item, index) => {
+                if (index === currentTrackIndex) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Automatically stop audio when user leaves the page
+        window.addEventListener('beforeunload', () => {
+            audio.pause();
+        });
+    </script>
+</body>
+</html>
